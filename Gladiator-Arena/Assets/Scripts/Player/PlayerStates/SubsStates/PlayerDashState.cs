@@ -20,7 +20,7 @@ public class PlayerDashState : PlayerAbilityState
         CanDash = false;
         player.InputHandler.UseDashInput();
 
-        dashDirection = Vector2.right * player.FacingDirection;
+        dashDirection = Vector2.right * core.Movement.FacingDirection;
         startTime = Time.time;
     }
 
@@ -28,21 +28,20 @@ public class PlayerDashState : PlayerAbilityState
     {
         base.Exit();
 
-        if(player.CurrenctVelocity.y > 0) 
+        if(core.Movement.CurrentVelocity.y > 0) 
         {
-            player.SetVelocityY(player.CurrenctVelocity.y * playerData.dashEndYMultiplier);
+            core.Movement.SetVelocityY(core.Movement.CurrentVelocity.y * playerData.dashEndYMultiplier);
         }
     }
 
     public override void LogicUpdate()
     {
-        Debug.Log("ok");
         base.LogicUpdate();
 
         if(!isExitingState)
         {
             player.RB.drag = playerData.drag;
-            player.SetVelocity(playerData.dashVelocity, dashDirection);
+            core.Movement.SetVelocity(playerData.dashVelocity, dashDirection);
 
             if(Time.time >= startTime + playerData.dashTime) 
             {

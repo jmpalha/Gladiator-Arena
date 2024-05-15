@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -16,34 +17,42 @@ public class Player : MonoBehaviour
     public PlayerWallSlideState WallSlideState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerDashState DashState { get; private set; }
+    public PlayerAttackSate PrimaryAttackState { get; private set; }
+    public PlayerAttackSate SecondaryAttackState { get; private set; }
 
     [SerializeField]
     private PlayerData playerData;
     #endregion
 
     #region Components
+
+    public Core Core { get; private set; }
     public Animator Anim { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
+
+    public PlayerInventory Inventory { get; private set; }
     #endregion
 
     #region Check Transforms
 
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private Transform wallCheck;
+
 
     #endregion
 
     #region Other Variables
-    public Vector2 CurrenctVelocity { get; private set; }
-    public int FacingDirection { get; private set; }
 
     private Vector2 workspace;
+
+
+    
     #endregion
 
     #region Unity CallBack Functions
     private void Awake()
     {
+        Core = GetComponentInChildren<Core>();
+
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
@@ -54,6 +63,8 @@ public class Player : MonoBehaviour
         WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, "wallSlide");
         WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, "inAir");
         DashState = new PlayerDashState(this, StateMachine, playerData, "slide");
+        PrimaryAttackState = new PlayerAttackSate(this, StateMachine, playerData, "attack");
+        SecondaryAttackState = new PlayerAttackSate(this, StateMachine, playerData, "attack");
     }
 
     private void Start()
@@ -61,15 +72,18 @@ public class Player : MonoBehaviour
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
         RB = GetComponent<Rigidbody2D>();
+        Inventory = GetComponent<PlayerInventory>();
 
-        FacingDirection = 1;
+        PrimaryAttackState.SetWeapon(Inventory.waepons[(int)CombatInputs.primary]);
+        //SecondaryAttackState.SetWeapon(Inventory.waepons[(int)CombatInputs.primary]);
+
 
         StateMachine.Initialize(IdleState);
     }
 
     private void Update()
     {
-        CurrenctVelocity = RB.velocity;
+        Core.LogicUpdate();
         StateMachine.CurrentState.LogicUpdate();
     }
 
@@ -79,75 +93,20 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    #region Set Functions
-
-    public void SetVelocity(float velocity, Vector2 angle, int direction)
-    {
-        angle.Normalize();
-        workspace.Set(angle.x * velocity * direction, angle.y * velocity);
-        RB.velocity = workspace;
-        CurrenctVelocity = workspace;
-    }
-
-    public void SetVelocity(float velocity, Vector2 direction)
-    {
-        workspace = direction * velocity;
-        RB.velocity = workspace;
-        CurrenctVelocity = workspace;
-    }
-    public void SetVelocityX(float velocity)
-    {
-        workspace.Set(velocity, CurrenctVelocity.y);
-        RB.velocity = workspace;
-        CurrenctVelocity = workspace;
-    }
-
-    public void SetVelocityY(float velocity) 
-    {
-        workspace.Set(CurrenctVelocity.x, velocity);
-        RB.velocity = workspace;
-        CurrenctVelocity = workspace;
-    }
-    #endregion
-
     #region Check Functions
 
-    public bool CheckIfGrounded()
-    {
-        return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
-    }
 
-    public bool CheckIfTouchingWall()
-    {
-        return Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
-    }
 
-    public bool CheckIfTouchingWallBack()
-    {
-        return Physics2D.Raycast(wallCheck.position, Vector2.right * -FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
-    }
-    public void CheckIfShouldFlip(int xInput)
-    {
-        if (xInput != 0 && xInput != FacingDirection) { Flip(); }
-    }
 
     #endregion
 
     #region Other Funcitons
-    private void Flip()
-    {
-        FacingDirection *= -1;
-        transform.Rotate(0.0f, 180.0f, 0, 0f);
-    }
+
 
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
     #endregion
 
     public virtual void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(groundCheck.position, playerData.groundCheckRadius);
-        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + playerData.wallCheckDistance, wallCheck.position.y, wallCheck.position.z));
-    }
+
 }
