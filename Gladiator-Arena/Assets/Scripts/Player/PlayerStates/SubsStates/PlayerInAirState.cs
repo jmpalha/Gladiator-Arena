@@ -17,9 +17,9 @@ public class PlayerInAirState : PlayerState
     public override void DoChecks()
     {
         base.DoChecks();
-        isGrounded = player.CheckIfGrounded();
-        isTouchingWall = player.CheckIfTouchingWall();
-        isTouchingWallBack = player.CheckIfTouchingWallBack();
+        isGrounded = core.CollisionSenses.Ground;
+        isTouchingWall = core.CollisionSenses.WallFront;
+        isTouchingWallBack = core.CollisionSenses.WallBack;
     }
 
     public override void Enter()
@@ -39,13 +39,21 @@ public class PlayerInAirState : PlayerState
         xInput = player.InputHandler.NormInputX;
         jumpInput = player.InputHandler.JumpInput;
 
-        if (isGrounded && player.CurrenctVelocity.y < 0.01f)
+        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary])
+        {
+            stateMachine.ChangeState(player.PrimaryAttackState);
+        }
+        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary])
+        {
+            stateMachine.ChangeState(player.SecondaryAttackState);
+        }
+        else if (isGrounded && core.Movement.CurrentVelocity.y < 0.01f)
         {
             stateMachine.ChangeState(player.LandState);
         }
         else if(jumpInput && (isTouchingWall || isTouchingWallBack))
         {
-            isTouchingWall = player.CheckIfTouchingWall();
+            isTouchingWall = core.CollisionSenses.WallFront;
             player.WallJumpState.DetermineWallJumpDirection(isTouchingWall);
             stateMachine.ChangeState(player.WallJumpState);
         }
@@ -53,17 +61,17 @@ public class PlayerInAirState : PlayerState
         {
             stateMachine.ChangeState(player.JumpState);
         }
-        else if(isTouchingWall && xInput == player.FacingDirection && player.CurrenctVelocity.y <= 0)
+        else if(isTouchingWall && xInput == core.Movement.FacingDirection && core.Movement.CurrentVelocity.y <= 0)
         {
             stateMachine.ChangeState(player.WallSlideState);
         }
         else
         {
-            player.CheckIfShouldFlip(xInput);
-            player.SetVelocityX(playerData.movementVelocity * xInput);
+            core.Movement.CheckIfShouldFlip(xInput);
+            core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
 
-            player.Anim.SetFloat("xVelocity", Mathf.Abs(player.CurrenctVelocity.x));
-            player.Anim.SetFloat("yVelocity", player.CurrenctVelocity.y);
+            player.Anim.SetFloat("xVelocity", Mathf.Abs(core.Movement.CurrentVelocity.x));
+            player.Anim.SetFloat("yVelocity", core.Movement.CurrentVelocity.y);
         }
     }
 
