@@ -24,31 +24,15 @@ public class Player : MonoBehaviour
     private PlayerData playerData;
     #endregion
 
-    #region Components
-
     public Core Core { get; private set; }
     public Animator Anim { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
-
     public PlayerInventory Inventory { get; private set; }
-    #endregion
 
-    #region Check Transforms
-
-
-
-    #endregion
-
-    #region Other Variables
 
     private Vector2 workspace;
 
-
-    
-    #endregion
-
-    #region Unity CallBack Functions
     private void Awake()
     {
         Core = GetComponentInChildren<Core>();
@@ -77,7 +61,6 @@ public class Player : MonoBehaviour
         PrimaryAttackState.SetWeapon(Inventory.waepons[(int)CombatInputs.primary]);
         //SecondaryAttackState.SetWeapon(Inventory.waepons[(int)CombatInputs.primary]);
 
-
         StateMachine.Initialize(IdleState);
     }
 
@@ -91,20 +74,8 @@ public class Player : MonoBehaviour
     {
         StateMachine.CurrentState.PhysicsUpdate();
     }
-    #endregion
-
-    #region Check Functions
-
-
-
-
-    #endregion
-
-    #region Other Funcitons
-
 
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
-    #endregion
 
     public virtual void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
