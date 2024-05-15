@@ -70,12 +70,16 @@ public class Player : MonoBehaviour
     {
         Core.LogicUpdate();
         StateMachine.CurrentState.LogicUpdate();
-        PrimaryAttackState.SetWeapon(Inventory.waepons[weaponID]);
     }
 
     private void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
+    }
+
+    public void setWeapon(int id)
+    {
+        PrimaryAttackState.SetWeapon(Inventory.waepons[id]);
     }
 
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
