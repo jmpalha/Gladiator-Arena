@@ -9,9 +9,12 @@ public class CombatTestDummy : MonoBehaviour, IDamageable
     private float maxHealth;
     private float currHealth;
 
+    [SerializeField] private HealthBar _healthBar;
+
     public void Damage(float amount)
     {
         currHealth -= amount;
+        _healthBar.UpdateHealthBar(maxHealth, currHealth);
 
         Debug.Log("Dummy took" + amount + "of damage");
 
@@ -23,5 +26,6 @@ public class CombatTestDummy : MonoBehaviour, IDamageable
         anim = GetComponent<Animator>();
         maxHealth = 100;
         currHealth = maxHealth;
+        _healthBar.UpdateHealthBar(maxHealth, currHealth);
     }
 }
