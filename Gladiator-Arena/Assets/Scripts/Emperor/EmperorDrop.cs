@@ -25,5 +25,8 @@ public class EmperorDrop : MonoBehaviour
             randomNumber = Random.Range(-30, 30);
             Instantiate(emperorItems[i], transform.position + new Vector3(randomNumber, 0, 0), Quaternion.identity);
         }   
+
     }
+
+
 }

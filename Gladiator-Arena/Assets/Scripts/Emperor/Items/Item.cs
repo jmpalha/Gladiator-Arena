@@ -20,6 +20,7 @@ public class Item : MonoBehaviour
             player = collision.gameObject.GetComponent<Player>();
 
             changeWeapon();
+            Destroy(gameObject);
         }
     }
 
