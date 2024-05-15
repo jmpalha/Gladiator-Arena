@@ -9,6 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34c808d91b0be584e8ecb85e672149f3, type: 3}
-  m_Name: Spear1
+  m_Script: {fileID: 11500000, guid: 05b49ecf7af433f499dc75b944bd58c7, type: 3}
+  m_Name: Light_Sword_1
   m_EditorClassIdentifier: 
+  attackDetails:
+  - attackName: Slash 1
+    movementSpeed: 3
+    damageAmount: 10
+  - attackName: Slash 2
+    movementSpeed: 2
+    damageAmount: 20

@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
     public PlayerInventory Inventory { get; private set; }
 
 
+    [SerializeField]  public int weaponID;
+
     private Vector2 workspace;
 
     private void Awake()
@@ -58,7 +60,7 @@ public class Player : MonoBehaviour
         RB = GetComponent<Rigidbody2D>();
         Inventory = GetComponent<PlayerInventory>();
 
-        PrimaryAttackState.SetWeapon(Inventory.waepons[(int)CombatInputs.primary]);
+        PrimaryAttackState.SetWeapon(Inventory.waepons[weaponID]);
         //SecondaryAttackState.SetWeapon(Inventory.waepons[(int)CombatInputs.primary]);
 
         StateMachine.Initialize(IdleState);
@@ -68,6 +70,7 @@ public class Player : MonoBehaviour
     {
         Core.LogicUpdate();
         StateMachine.CurrentState.LogicUpdate();
+        PrimaryAttackState.SetWeapon(Inventory.waepons[weaponID]);
     }
 
     private void FixedUpdate()
