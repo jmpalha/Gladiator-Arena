@@ -7,7 +7,7 @@ public class Stats : CoreComponent
     [SerializeField] private float maxHealth;
     private float currenthealth;
 
-    [SerializeField] private HealthBar _healthBar;
+    //[SerializeField] private HealthBar _healthBar;
 
     protected override void Awake()
     {
@@ -15,13 +15,13 @@ public class Stats : CoreComponent
 
         currenthealth = maxHealth;
 
-        _healthBar.UpdateHealthBar(maxHealth, currenthealth);
+        //_healthBar.UpdateHealthBar(maxHealth, currenthealth);
     }
 
     public void DeacreseHealth(float amount)
     {
         currenthealth -= amount;
-        _healthBar.UpdateHealthBar(maxHealth, currenthealth);
+        //_healthBar.UpdateHealthBar(maxHealth, currenthealth);
 
         if (currenthealth <= 0 )
         {

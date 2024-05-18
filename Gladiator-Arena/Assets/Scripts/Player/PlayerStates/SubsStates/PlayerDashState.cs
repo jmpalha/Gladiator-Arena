@@ -28,9 +28,9 @@ public class PlayerDashState : PlayerAbilityState
     {
         base.Exit();
 
-        if(core.Movement.CurrentVelocity.y > 0) 
+        if(core.Movement.CurrentVelocity.x != 0) 
         {
-            core.Movement.SetVelocityY(core.Movement.CurrentVelocity.y * playerData.dashEndYMultiplier);
+            core.Movement.SetVelocityX(0);
         }
     }
 

@@ -22,7 +22,7 @@ public class EmperorDrop : MonoBehaviour
     {
         int randomNumber;
         for(int i = 0; i < emperorItems.Length; i++){
-            randomNumber = Random.Range(-30, 30);
+            randomNumber = Random.Range(-25, 25);
             Instantiate(emperorItems[i], transform.position + new Vector3(randomNumber, 0, 0), Quaternion.identity);
         }   
 

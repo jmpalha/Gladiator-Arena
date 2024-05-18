@@ -24,7 +24,7 @@ public class CombatTestDummy : MonoBehaviour, IDamageable
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        maxHealth = 100;
+        maxHealth = 1000;
         currHealth = maxHealth;
         _healthBar.UpdateHealthBar(maxHealth, currHealth);
     }
