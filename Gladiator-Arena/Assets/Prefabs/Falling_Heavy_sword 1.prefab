@@ -144,7 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa5893d1c50c77d44bbe50c723f60f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  despawnTime: 10
   id: 0
+  collider: {fileID: 0}
   type: 0
 --- !u!50 &4615357691530871216
 Rigidbody2D:

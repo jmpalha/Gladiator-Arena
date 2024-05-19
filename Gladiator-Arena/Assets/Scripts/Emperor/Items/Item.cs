@@ -24,30 +24,19 @@ public class Item : MonoBehaviour
 
     private void Awake() {
 
-
-        // player = GameManager.instance.player.transform;
-
     }
 
     private void Update(){
-        // despawnTime -= Time.deltaTime;
+        despawnTime -= Time.deltaTime;
 
-        // if(despawnTime < 0 ){
-        //     Destroy(gameObject);
-        // }
+        if(despawnTime < 0 ){
+            Destroy(gameObject);
+        }
+        
         if(transform.position.y < 2 ){
             collider.isTrigger = true;
             Destroy(itemRb);
-            // Destroy(gameObject);
         }
-
-        // float distance = Vector3.Distance(transform.position.y,player);
-
-        // if(distance > pickUpDistance){
-        //     return;
-        // }
-        // transform.position = Vector3.MoveTowards(transform.position, player.position);
-
         
     }
     private void OnTriggerEnter2D(Collider2D collision)
