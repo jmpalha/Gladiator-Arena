@@ -30,6 +30,18 @@ public class Player : MonoBehaviour
     public Rigidbody2D RB { get; private set; }
     public PlayerInventory Inventory { get; private set; }
 
+    private float saveDespawnTime = 5f;
+    private float speedDespawnTime = 5f;
+    private bool speedPotionOn = false;
+    private float hitDespawnTime = 5f;
+    private bool hitPotionOn = false;
+    private float jumpDespawnTime = 5f;
+    private bool jumpPotionOn = false;
+    private int increaseDamage = 1;
+
+    public AudioSource hitSound;
+
+
 
     [SerializeField]  public int weaponID;
 
@@ -49,8 +61,8 @@ public class Player : MonoBehaviour
         WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, "wallSlide");
         WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, "inAir");
         DashState = new PlayerDashState(this, StateMachine, playerData, "slide");
-        PrimaryAttackState = new PlayerAttackSate(this, StateMachine, playerData, "attack");
-        SecondaryAttackState = new PlayerAttackSate(this, StateMachine, playerData, "attack");
+        PrimaryAttackState = new PlayerAttackSate(this, StateMachine, playerData, "attack",hitSound);
+        SecondaryAttackState = new PlayerAttackSate(this, StateMachine, playerData, "attack",hitSound);
     }
 
     private void Start()
@@ -68,6 +80,36 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if(speedPotionOn){
+            speedDespawnTime -= Time.deltaTime;
+
+            if(speedDespawnTime < 0){
+                MoveState.setNewMoveVelocityIncrease(1);
+                speedDespawnTime = saveDespawnTime;
+                speedPotionOn = false;
+            }
+        }
+
+        if(hitPotionOn){
+            hitDespawnTime -= Time.deltaTime;
+
+            if(hitDespawnTime < 0){
+                increaseDamage = 1;
+                hitDespawnTime = saveDespawnTime;
+                hitPotionOn = false;
+            }
+        }
+
+        if(jumpPotionOn){
+            jumpDespawnTime -= Time.deltaTime;
+
+            if(jumpDespawnTime < 0){
+                JumpState.setNewJumpVelocityIncrease(1);
+                jumpDespawnTime = saveDespawnTime;
+                jumpPotionOn = false;
+            }
+        }
+
         Core.LogicUpdate();
         StateMachine.CurrentState.LogicUpdate();
     }
@@ -80,6 +122,38 @@ public class Player : MonoBehaviour
     public void setWeapon(int id)
     {
         PrimaryAttackState.SetWeapon(Inventory.waepons[id]);
+    }
+
+    public void setHitPotionOn(){
+        if(!hitPotionOn){
+            increaseDamage = 2;
+            hitPotionOn = true;
+        }else{
+            hitDespawnTime += saveDespawnTime;
+        }
+    }
+
+    public void setSpeedPotionOn(){
+        if(!speedPotionOn){
+            MoveState.setNewMoveVelocityIncrease(3);
+            speedPotionOn = true;
+        }else{
+            speedDespawnTime += saveDespawnTime;
+        }
+    }
+
+    public void setJumpPotionOn(){
+        if(!jumpPotionOn){
+            JumpState.setNewJumpVelocityIncrease(2);
+            jumpPotionOn = true;
+        }else{
+            jumpDespawnTime += saveDespawnTime;
+        }
+
+    }
+
+    public int getIncreaseDamage(){
+        return increaseDamage;
     }
 
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();

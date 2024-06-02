@@ -33,7 +33,7 @@ public class Item : MonoBehaviour
             Destroy(gameObject);
         }
         
-        if(transform.position.y < -4 ){
+        if(transform.position.y < 524){
             collider.isTrigger = true;
             Destroy(itemRb);
         }

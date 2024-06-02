@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Stats : CoreComponent
 {
     [SerializeField] private float maxHealth;
+    public Player opponent;
+
     public float currenthealth;
 
     public HealthBar _healthBar;
@@ -19,7 +21,8 @@ public class Stats : CoreComponent
 
     public void DeacreseHealth(float amount)
     {
-        currenthealth -= amount;
+
+        currenthealth -= amount*opponent.getIncreaseDamage();
         _healthBar.UpdateHealthBar(maxHealth, currenthealth);
 
         if (currenthealth <= 0 )

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerGroundedState
 {
+    private int moveVelocityIncrease = 1;
+
+
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -29,7 +32,7 @@ public class PlayerMoveState : PlayerGroundedState
 
         core.Movement.CheckIfShouldFlip(xInput);
 
-        core.Movement.SetVelocityX(playerData.movementVelocity * xInput);
+        core.Movement.SetVelocityX(playerData.movementVelocity * xInput * moveVelocityIncrease);
 
         if(xInput == 0 && !isExitingState)
         {
@@ -40,5 +43,9 @@ public class PlayerMoveState : PlayerGroundedState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+    }
+
+    public void setNewMoveVelocityIncrease(int increase){
+        moveVelocityIncrease = increase;
     }
 }

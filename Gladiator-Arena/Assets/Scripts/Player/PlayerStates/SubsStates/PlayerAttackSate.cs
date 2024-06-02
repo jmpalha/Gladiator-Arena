@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class PlayerAttackSate : PlayerAbilityState
 {
-
     private Weapon weapon;
 
     private float velocityToSet;
     private bool setVelocity;
 
-    public PlayerAttackSate(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
+    public AudioSource hitSound;
+    public bool alreadyHit;
+
+    public PlayerAttackSate(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName, AudioSource hitSound) : base(player, stateMachine, playerData, animBoolName)
     {
+        this.hitSound = hitSound;
     }
 
     public override void Enter()
@@ -63,6 +66,12 @@ public class PlayerAttackSate : PlayerAbilityState
         base.AnimationFinishTrigger();
 
         isAbilityDone = true;
+        if(!alreadyHit){
+            alreadyHit = true;
+            hitSound.Play();
+        }else{
+            alreadyHit = false;
+        }
     }
     #endregion
 }

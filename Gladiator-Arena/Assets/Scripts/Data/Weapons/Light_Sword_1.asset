@@ -15,7 +15,11 @@ MonoBehaviour:
   attackDetails:
   - attackName: Slash 1
     movementSpeed: 3
-    damageAmount: 10
+    damageAmount: 15
+    knockbackStrength: 0
+    knockbackAngle: {x: 0, y: 0}
   - attackName: Slash 2
     movementSpeed: 2
-    damageAmount: 20
+    damageAmount: 15
+    knockbackStrength: 0
+    knockbackAngle: {x: 0, y: 0}

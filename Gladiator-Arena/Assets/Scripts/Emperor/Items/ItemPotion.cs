@@ -1,0 +1,71 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class ItemPotion : MonoBehaviour
+{
+    [SerializeField] float despawnTime;
+    public int id;
+
+    public BoxCollider2D collider;
+    private Rigidbody2D itemRb;
+    public int type;
+
+    private Player player;
+
+    private int playerWeapon;
+
+    void Start(){
+        collider = GetComponent<BoxCollider2D>();
+        itemRb = GetComponent<Rigidbody2D>();
+
+    }
+
+    private void Awake() {
+
+    }
+
+    private void Update(){
+        despawnTime -= Time.deltaTime;
+
+        if(despawnTime < 0 ){
+            Destroy(gameObject);
+        }
+        
+        if(transform.position.y < 524){
+            collider.isTrigger = true;
+            Destroy(itemRb);
+        }
+        
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if( collision.tag == "Player")
+        {
+            player = collision.gameObject.GetComponent<Player>();
+
+            setPotionOn();
+            Destroy(gameObject);
+        }
+    }
+
+    private void setPotionOn()
+    {
+        switch (id)
+        {
+            case 1:
+                player.setJumpPotionOn();
+                break;
+            
+            case 2:
+                player.setSpeedPotionOn();
+                break;
+            
+            case 3:
+                player.setHitPotionOn();
+                break;
+        }
+
+    }
+}
