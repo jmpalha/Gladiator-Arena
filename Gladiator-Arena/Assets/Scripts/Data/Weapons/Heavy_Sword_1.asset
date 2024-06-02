@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDetails:
   - attackName: 
-    movementSpeed: 2
-    damageAmount: 20
+    movementSpeed: 0.5
+    damageAmount: 12
     knockbackStrength: 0
     knockbackAngle: {x: 0, y: 0}

@@ -739,7 +739,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 152.6341}
+  m_AnchoredPosition: {x: 0, y: 160}
   m_SizeDelta: {x: 523.8973, y: 55.2682}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &875256284
@@ -1311,8 +1311,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -25}
-  m_SizeDelta: {x: 440.6637, y: 50}
+  m_AnchoredPosition: {x: 0, y: -15}
+  m_SizeDelta: {x: 397.7069, y: 41.4086}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1579036150
 MonoBehaviour:
@@ -1337,7 +1337,8 @@ MonoBehaviour:
   m_text: "PLAYER 1 controls: \n\t- W,A,D to move\n\t- S to dash\n\t- LEFT SHIFT
     to attack\n\nPLAYER 2 controls: \n\t- LEFT, UP, RIGHT ARROWS to move\n\t- DOWN
     ARROW to dash\n\t- RIGHT ALT to attack\n\nEACH PLAYER HAS 3 LIVES, IF YOU RUN
-    OUT YOU LOSE\n\nALL ITEMS ARE GRABBED AUTOMATICALLY\n\t\n"
+    OUT YOU LOSE\n\nALL ITEMS ARE GRABBED AUTOMATICALLY AND WILL DISAPPEAR IF THEY
+    ARE NOT PICKED UP\n\t\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

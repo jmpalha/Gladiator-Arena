@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDetails:
   - attackName: Slash 1
-    movementSpeed: 3
-    damageAmount: 15
+    movementSpeed: 5
+    damageAmount: 5
     knockbackStrength: 0
     knockbackAngle: {x: 0, y: 0}
   - attackName: Slash 2
-    movementSpeed: 2
-    damageAmount: 15
+    movementSpeed: 3
+    damageAmount: 5
     knockbackStrength: 0
     knockbackAngle: {x: 0, y: 0}
