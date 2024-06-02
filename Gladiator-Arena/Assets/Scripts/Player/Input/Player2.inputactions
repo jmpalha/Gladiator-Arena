@@ -90,7 +90,7 @@
                 {
                     "name": "",
                     "id": "616ae6a8-5a08-4841-969b-5a81406085a4",
-                    "path": "<Keyboard>/rightAlt",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -101,7 +101,7 @@
                 {
                     "name": "",
                     "id": "2d52e18d-e6d8-43df-89cb-89c94318db33",
-                    "path": "<Keyboard>/rightShift",
+                    "path": "<Keyboard>/rightAlt",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",

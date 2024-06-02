@@ -1334,9 +1334,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "PLAYER 1 controls: \n\t- W,A,D to move\n\t- LEFT SHIFT to dash\n\t- E
-    to attack\n\nPLAYER 2 controls: \n\t- LEFT, UP, RIGHT ARROWS to move\n\t- RIGHT
-    ALT to dash\n\t- RIGHT SHIFT to attack\n\nEACH PLAYER HAS 3 LIVES, IF YOU RUN
+  m_text: "PLAYER 1 controls: \n\t- W,A,D to move\n\t- S to dash\n\t- LEFT SHIFT
+    to attack\n\nPLAYER 2 controls: \n\t- LEFT, UP, RIGHT ARROWS to move\n\t- DOWN
+    ARROW to dash\n\t- RIGHT ALT to attack\n\nEACH PLAYER HAS 3 LIVES, IF YOU RUN
     OUT YOU LOSE\n\nALL ITEMS ARE GRABBED AUTOMATICALLY\n\t\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
