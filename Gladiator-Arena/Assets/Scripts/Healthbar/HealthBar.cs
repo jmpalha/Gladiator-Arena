@@ -6,22 +6,11 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
 
-    [SerializeField] private Image _healthbarSprite;
+    public Image _healthbarSprite;
 
     public void UpdateHealthBar(float maxHealth, float currentHealth)
     {
         _healthbarSprite.fillAmount = currentHealth / maxHealth;
     }
 
-    // Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
 }

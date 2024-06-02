@@ -7,17 +7,14 @@ public static class GM
 {
     public static int Lives1 = 3;
     public static int Lives2 = 3;
-
-
     public static void RemoveLife()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-        Debug.Log(players[0].name);
-        Debug.Log(players[1].name);
 
         if (players[0].name == "Player")
         {
+            Debug.Log("okok");
             Stats stats = players[0].GetComponentInChildren<Stats>();
 
             if(stats.currenthealth == 0 && Lives1 > 0)
@@ -28,7 +25,6 @@ public static class GM
         }
         else if (players[0].name == "Player2")
         {
-            Debug.Log("okok");
             Stats stats = players[0].GetComponentInChildren<Stats>();
 
             if (stats.currenthealth == 0 && Lives2 > 0)
@@ -37,9 +33,10 @@ public static class GM
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
-        else if(players[1].name == "Player")
-        {
 
+        if(players[1].name == "Player")
+        {
+            Debug.Log("okok1");
             Stats stats = players[1].GetComponentInChildren<Stats>();
 
             if (stats.currenthealth == 0 && Lives1 > 0)
